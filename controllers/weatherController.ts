@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import axios, {AxiosResponse} from "axios";
-import { WeatherError } from "../midllewars/errorHandlers";
 import { WEATHER_API_ERROR_MESSAGE } from "../constantes/errorMessage";
 import { WEATHER_API_URL } from "../constantes/config";
+import { ApiError } from "../errors/ApiError";
 
 export class WeatherController {
     private API_KEY : string;
@@ -20,7 +20,7 @@ export class WeatherController {
             const data = response.data;
             res.json(data);
         }catch(error){
-            next(new WeatherError(WEATHER_API_ERROR_MESSAGE));
+            next(new ApiError(WEATHER_API_ERROR_MESSAGE));
         }
     }
 }
